@@ -1,4 +1,3 @@
-from src.utils.extract_arxiv import get_arxiv_id, download_arxiv_source, find_main_tex_file, find_reference_files, parse_bib_content, parse_bbl_content, get_arxiv_main_text, get_arxiv_abstract
 from tqdm import tqdm
 import requests
 import re
@@ -11,6 +10,7 @@ import tempfile
 import time
 import torch
 from torch_geometric.data import Data
+from src.utils.extract_arxiv import get_arxiv_id, download_arxiv_source, find_main_tex_file, find_reference_files, parse_bib_content, parse_bbl_content, get_arxiv_main_text, get_arxiv_abstract
 
 
 def get_arxiv_ids(titles):
@@ -133,14 +133,13 @@ def build_citation_tree_with_ids(root_arxiv_id, paper_title):
     except Exception:
         return None
 
-def process_papers_from_file(file_path = r"./source.txt", output_folder = r"./dataset"):
+def process_papers_from_file(file_path = "./survey_info.txt", output_folder = "./dataset/graphs"):
     os.makedirs(output_folder, exist_ok=True)
     papers = []
     with open(file_path, 'r') as f:
         for line in f:
             arxiv_id, title = line.strip().split(', ', 1)
             papers.append((arxiv_id, title))
-
 
     for arxiv_id, title in papers:
         output_file = os.path.join(output_folder, f"{arxiv_id}.pt")
@@ -151,17 +150,15 @@ def process_papers_from_file(file_path = r"./source.txt", output_folder = r"./da
         graph = build_citation_tree_with_ids(arxiv_id, title)
         
         if graph is not None and len(graph.title)>1:
-            # Save the graph
             torch.save(graph, output_file)
             print(f"Saved graph for {arxiv_id}")
         else:
             print(f"Failed to build graph for {arxiv_id}")
 
-def clean_pyg_graphs(folder_path = r"./dataset"):
+def clean_pyg_graphs(folder_path = "./dataset/graphs"):
     pt_files = [f for f in os.listdir(folder_path) if f.endswith('.pt')]
     deleted_count = 0
     
-    # Iterate through each file with a progress bar
     for file in tqdm(pt_files, desc="Processing graphs"):
         file_path = os.path.join(folder_path, file)
         try:
@@ -174,9 +171,7 @@ def clean_pyg_graphs(folder_path = r"./dataset"):
         except Exception as e:
             print(f"Error processing {file}: {str(e)}")
     
-    print(f"Cleaning complete. Deleted {deleted_count} graphs.")
-
 
 if __name__ == "__main__":
-  process_papers_from_file()
-  clean_pyg_graphs()
+    process_papers_from_file()
+    clean_pyg_graphs()
