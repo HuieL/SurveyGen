@@ -1,7 +1,5 @@
 # SurveyGen
 
-We have some duties to do, you can pick one and leave your name behind the item you are working;
-
 ### Codes
 #### 1. Data Processing:
 - [x] Build Citation Network for Survery papers; 
