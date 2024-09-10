@@ -25,3 +25,10 @@ We have some duties to do, you can pick one and leave your name behind the item 
 - [ ] Experiment;
 - [ ] Conclution;
 - [ ] Appendix.
+
+---
+Process dataset
+```
+python -m src.dataset.build_graph
+python -m src.dataset.update_abstract
+```
