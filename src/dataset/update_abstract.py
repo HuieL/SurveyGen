@@ -66,5 +66,5 @@ def update_graphs_in_directory(directory):
     print(f"Updated {updated_graphs} out of {total_graphs} graphs in {directory}")
 
 if __name__ == "__main__":
-  directory = "./dataset/graphs"
+  directory = "./dataset/trees"
   update_graphs_in_directory(directory)
