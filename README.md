@@ -39,6 +39,6 @@ pip install fuzzywuzzy
 ---
 ### Process dataset
 ```
-python -m src.dataset.build_graph
-python -m src.dataset.update_abstract
+python -m src.dataset.build_tree
+python -m src.dataset.update_tree_abstract
 ```
