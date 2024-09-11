@@ -133,7 +133,7 @@ def build_citation_tree_with_ids(root_arxiv_id, paper_title):
     except Exception:
         return None
 
-def process_papers_from_file(file_path = "./survey_info.txt", output_folder = "./dataset/graphs"):
+def process_papers_from_file(file_path = "./survey_info.txt", output_folder = "./dataset/trees"):
     os.makedirs(output_folder, exist_ok=True)
     papers = []
     with open(file_path, 'r') as f:
@@ -155,7 +155,7 @@ def process_papers_from_file(file_path = "./survey_info.txt", output_folder = ".
         else:
             print(f"Failed to build graph for {arxiv_id}")
 
-def clean_pyg_graphs(folder_path = "./dataset/graphs"):
+def clean_pyg_graphs(folder_path = "./dataset/trees"):
     pt_files = [f for f in os.listdir(folder_path) if f.endswith('.pt')]
     deleted_count = 0
     
