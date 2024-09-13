@@ -35,6 +35,8 @@ pip install torch_geometric
 pip install backoff
 pip install scholarly
 pip install fuzzywuzzy
+pip install nltk
+pip install rank-bm25
 ```
 ---
 ### Process dataset
