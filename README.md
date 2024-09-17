@@ -8,7 +8,7 @@
 
 #### 2. Deep Clustering:
 - [x] GNNs; 
-- [ ] Hierachical Clustering
+- [ ] Hierarchical Clustering
 
 #### 3. LLM Generation:
 - [ ] Prompt design;
